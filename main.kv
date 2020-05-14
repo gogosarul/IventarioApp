@@ -1,0 +1,209 @@
+<MainWid>:
+    canvas:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
+            pos:self.pos
+#Clase de la pantalla inicial
+<StartWid>:
+    orientation: "vertical"
+    canvas:
+        Color:
+            rgb: 0.3,0.3,0.9
+        Rectangle:
+            size:self.size
+            pos:self.pos
+    BoxLayout:
+        size_hint_y: 0.7
+    Button:
+        size_hint_y: 0.1
+        text: "Conectar a la base de datos"
+        on_press: root.create_database()
+    BoxLayout:
+        size_hint_y: 0.2
+
+<DataWid>:
+    data: ''
+    data_id: ''
+    canvas:
+        Color:
+            rgb:0.2,0.2,0.2
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Label:
+        size_hint_x: 0.9
+        size_font: self.width*0.4
+        text: root.data
+    Button:
+        size_hint_x: 0.1
+        text: "Edit"
+        on_press: root.update_data(root.data_id)
+
+#Boton agregar
+<NewDataButton>:
+    font_size: self.height*0.5
+    text: "+"
+    on_press: root.create_new_product()
+
+#Pantalla productos
+<DataBaseWid>:
+    canvas:
+        Color:
+            rgb: 0.3,0.3,0.9
+        Rectangle:
+            size:self.size
+            pos:self.pos
+    ScrollView:
+        size: self.size
+        GridLayout:
+            id: container
+            padding: [10,10,10,10]
+            spacing: 5
+            size_hint_y: None
+            cols: 1
+            row_default_height: root.height*0.2
+            height: self.minimum_height
+#Label clave, hereda de Label
+<LeftLabel@Label>:
+    text_size: self.size
+    halign: "left"
+
+<MessagePopup>:
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            id: message
+            size_hint: 1,0.8
+            text: ""
+        Button:
+            size_hint: 1,0.2
+            text: "Regresar"
+            on_press: root.dismiss()
+
+#Formulario
+<InsertDataWid>:
+    orientation:"vertical"
+    canvas:
+        Color:
+            rgb: 0.3,0.3,0.9
+        Rectangle:
+            size:self.size
+            pos:self.pos
+    LeftLabel: #-------------ID
+        text: "ID:"
+    TextInput:
+        id: ti_id
+        write_tab: False
+        multiline: False
+        hint_text: "ID"
+    LeftLabel: #-------------Nombre
+        text: "Nombre:"
+    TextInput:
+        id: ti_nombre
+        write_tab: False
+        multiline: False
+        hint_text: "Nombre"
+    LeftLabel: #-------------Marca
+        text: "Marca:"
+    TextInput:
+        id: ti_marca
+        write_tab: False
+        multiline: False
+        hint_text: "Marca"
+    LeftLabel: #-------------Precio
+        text: "Precio:"
+    TextInput:
+        id: ti_precio
+        write_tab: False
+        multiline: False
+        hint_text: "Precio"
+    LeftLabel: #-------------Stock
+        text: "Stock:"
+    TextInput:
+        id: ti_stock
+        write_tab: False
+        multiline: False
+        hint_text: "Stock"
+    LeftLabel: #-------------Caducidad
+        text: "Caducidad:"
+    TextInput:
+        id: ti_caducidad
+        write_tab: False
+        multiline: False
+        hint_text: "YYYY-MM-DD"
+
+    #Separación entre formulario y botones
+    BoxLayout:
+        size_hint_y: 5
+    BoxLayout:
+        Button:
+            text: "Crear"
+            on_press: root.insert_data()
+        Button:
+            text: "Salir"
+            on_press: root.back_to_dbw()
+
+#Ventana update
+<UpdateDataWid>:
+    orientation:"vertical"
+    data_id: ''
+    canvas:
+        Color:
+            rgb: 0.3,0.3,0.9
+        Rectangle:
+            size:self.size
+            pos:self.pos
+    LeftLabel: #-------------ID
+        text: "ID: "+root.data_id
+    LeftLabel: #-------------Nombre
+        text: "Nombre:"
+    TextInput:
+        id: ti_nombre
+        write_tab: False
+        multiline: False
+        hint_text: "Nombre"
+    LeftLabel: #-------------Marca
+        text: "Marca:"
+    TextInput:
+        id: ti_marca
+        write_tab: False
+        multiline: False
+        hint_text: "Marca"
+    LeftLabel: #-------------Precio
+        text: "Precio:"
+    TextInput:
+        id: ti_precio
+        write_tab: False
+        multiline: False
+        hint_text: "Precio"
+    LeftLabel: #-------------Stock
+        text: "Stock:"
+    TextInput:
+        id: ti_stock
+        write_tab: False
+        multiline: False
+        hint_text: "Stock"
+    LeftLabel: #-------------Caducidad
+        text: "Caducidad:"
+    TextInput:
+        id: ti_caducidad
+        write_tab: False
+        multiline: False
+        hint_text: "YYYY-MM-DD"
+
+    #Separación entre formulario y botones
+    BoxLayout:
+        size_hint_y: 4
+    BoxLayout:
+        Button:
+            text: "Actualiza"
+            on_press: root.update_data()
+        Button:
+            text: "Eliminar"
+            on_press: root.delete_data()
+    BoxLayout:
+        Button:
+            text: "Regresar"
+            on_press: root.back_to_dbw()
