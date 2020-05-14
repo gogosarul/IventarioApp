@@ -10,18 +10,21 @@
     orientation: "vertical"
     canvas:
         Color:
-            rgb: 0.3,0.3,0.9
+            rgba: 0.3,0.3,0.9
         Rectangle:
             size:self.size
             pos:self.pos
+            source: "verificadorcaducidad.png"
+
     BoxLayout:
-        size_hint_y: 0.7
+        size_hint_y: 0.75
     Button:
+        background_color: .99, .4, .96, 1
         size_hint_y: 0.1
-        text: "Conectar a la base de datos"
+        text: "Conectar al Inventario"
         on_press: root.create_database()
     BoxLayout:
-        size_hint_y: 0.2
+        size_hint_y: 0.15
 
 <DataWid>:
     data: ''
@@ -33,25 +36,27 @@
             pos: self.pos
             size: self.size
     Label:
-        size_hint_x: 0.9
+        size_hint_x: 0.8
         size_font: self.width*0.4
         text: root.data
     Button:
-        size_hint_x: 0.1
-        text: "Edit"
+        background_color: .99, .4, .96, 1
+        size_hint_x: 0.2
+        text: "Editar"
         on_press: root.update_data(root.data_id)
 
 #Boton agregar
 <NewDataButton>:
     font_size: self.height*0.5
     text: "+"
+    background_color: .99, .4, .96, 1
     on_press: root.create_new_product()
 
 #Pantalla productos
 <DataBaseWid>:
     canvas:
         Color:
-            rgb: 0.3,0.3,0.9
+            rgb: 0.99,0.4,0.96
         Rectangle:
             size:self.size
             pos:self.pos
@@ -78,6 +83,7 @@
             size_hint: 1,0.8
             text: ""
         Button:
+            background_color: .99, .4, .96, 1
             size_hint: 1,0.2
             text: "Regresar"
             on_press: root.dismiss()
@@ -87,7 +93,7 @@
     orientation:"vertical"
     canvas:
         Color:
-            rgb: 0.3,0.3,0.9
+            rgb: 0.99,0.4,0.96
         Rectangle:
             size:self.size
             pos:self.pos
@@ -97,7 +103,7 @@
         id: ti_id
         write_tab: False
         multiline: False
-        hint_text: "ID"
+        hint_text: "Autoincremental"
     LeftLabel: #-------------Nombre
         text: "Nombre:"
     TextInput:
@@ -139,9 +145,11 @@
         size_hint_y: 5
     BoxLayout:
         Button:
+            background_color: .99, .4, .96, 1
             text: "Crear"
             on_press: root.insert_data()
         Button:
+            background_color: .99, .4, .96, 1
             text: "Salir"
             on_press: root.back_to_dbw()
 
@@ -151,7 +159,7 @@
     data_id: ''
     canvas:
         Color:
-            rgb: 0.3,0.3,0.9
+            rgb: 0.99,0.4,0.96
         Rectangle:
             size:self.size
             pos:self.pos
@@ -198,12 +206,15 @@
         size_hint_y: 4
     BoxLayout:
         Button:
-            text: "Actualiza"
+            background_color: .99, .4, .96, 1
+            text: "Actualizar"
             on_press: root.update_data()
         Button:
+            background_color: .99, .4, .96, 1
             text: "Eliminar"
             on_press: root.delete_data()
     BoxLayout:
         Button:
+            background_color: .99, .4, .96, 1
             text: "Regresar"
             on_press: root.back_to_dbw()

@@ -33,7 +33,7 @@ def create_table_productos(cursor):
         Marca TEXT NOT NULL,
         Precio FLOAT NOT NULL,
         Stock INT NOT NULL,
-        Caducidad TEXT NOT NULL
+        Caducidad DATE NOT NULL
         )
         """
     )
@@ -117,7 +117,7 @@ class DataBaseWid(BoxLayout):
             r2 = i[1]+', '+i[2]+'\n'
             r3 = 'Precio por unidad: $'+str(i[3])+'\n'
             r4 = 'En stock: '+str(i[4])+'\n'
-            r5 = 'Caducidad: '+i[5]
+            r5 = 'Caducidad: '+str(+i[5])
             wid.data_id = str(i[0])
             wid.data = r1+r2+r3+r4+r5
             self.ids.container.add_widget(wid)
@@ -135,15 +135,15 @@ class InsertDataWid(BoxLayout):
     def insert_data(self):
         con = sqlite3.connect(self.mainwid.DB_PATH)
         cursor = con.cursor()
-        d1 = self.ids.ti_id.text
+        #d1 = self.ids.ti_id.text
         d2 = self.ids.ti_nombre.text
         d3 = self.ids.ti_marca.text
         d4 = self.ids.ti_precio.text
         d5 = self.ids.ti_stock.text
         d6 = self.ids.ti_caducidad.text
-        a1 = (d1,d2,d3,d4,d5,d6)
+        a1 = (d2,d3,d4,d5,d6)
         s1 = 'INSERT INTO Productos(ID, Nombre, Marca, Precio, Stock, Caducidad)'
-        s2 = 'VALUES(%s,"%s","%s","%s","%s",%s)' % a1
+        s2 = 'VALUES(null,"%s","%s","%s","%s",%s)' % a1
 
         try:
             cursor.execute(s1+' '+s2)
